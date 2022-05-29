@@ -19,15 +19,9 @@ public class UrlController : Controller
     [Route("/urls")]
     public async Task<IActionResult> Index(int page = 1)
     { 
-        const int pageSize = 10; 
- 
-        var source = _db.Urls.AsQueryable();
-        var count = await source.CountAsync();
-        var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
- 
-        var pageViewModel = new PageViewModel(count, page, pageSize);
-        var viewModel = new IndexViewModel(items, pageViewModel);
-        return View(viewModel);
+        const int pageSize = 10;
+        var urls = _db.Urls.AsNoTracking();
+        return View(await PaginatedListViewModel<Url>.CreateAsync(urls, page, pageSize));
     }
     
     public async Task<IActionResult> Show(int id)

@@ -17,6 +17,11 @@
 
     <ItemGroup>
       <Folder Include="Migrations" />
+      <Folder Include="TagHelpers" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="ViewModels\IndexViewModel.cs" />
     </ItemGroup>
 
 </Project>

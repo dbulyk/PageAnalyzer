@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model PageAnalyzerNET.ViewModels.IndexViewModel
+@model PageAnalyzerNET.ViewModels.PaginatedListViewModel<Url>
 
 <div class="container-lg mt-5">
     <table class="table table-bordered table-hover mt-3">
@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var url in Model.Urls)
+        @foreach (var url in Model)
         {
             <tr>
                 <td>@url.Id</td>
@@ -26,26 +26,30 @@
         </tbody>
     </table>
 
-    <page-link page-model="Model.PageViewModel" page-action="Index"></page-link>
-    @* <nav aria-label="Page navigation"> *@
-    @*     <ul class="pagination justify-content-center mt-5"> *@
-    @*         @if (Model.PageViewModel.HasPreviousPage) *@
-    @*         { *@
-    @*             <li> *@
-    @*                 <a asp-action="Index" asp-controller="Url" asp-route-page="@(Model.PageViewModel.PageNumber - 1)"  *@
-    @*                    class="page-link">Назад</a> *@
-    @*             </li> *@
-    @*         } *@
-    @*         <li> *@
-    @*             <a class="page-item">@Model.PageViewModel.PageNumber</a> *@
-    @*         </li> *@
-    @*         @if (Model.PageViewModel.HasNextPage) *@
-    @*         { *@
-    @*             <li> *@
-    @*                 <a asp-action="Index" asp-controller="Url" asp-route-page="@(Model.PageViewModel.PageNumber + 1)"  *@
-    @*                    class="page-link">Вперед</a> *@
-    @*             </li>   *@
-    @*         } *@
-    @*     </ul> *@
-    @* </nav> *@
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+    
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mt-5">
+            <li>
+                <a asp-action="Index" asp-controller="Url"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   class="page-link @prevDisabled">
+                    Назад
+                </a>
+            </li>
+            <li>
+                <a class="page-link page-item">@Model.PageIndex</a>
+            </li>
+            <li>
+                <a asp-action="Index" asp-controller="Url"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   class="page-link @nextDisabled">
+                    Вперёд
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
