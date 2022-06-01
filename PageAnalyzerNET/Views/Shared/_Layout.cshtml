@@ -26,6 +26,14 @@
     </nav>
 </header>
 <main class="flex-grow-1">
+    @if (Context.Session.Keys.Contains("flash") && Context.Session.Keys.Contains("flash-type"))
+    {
+        <div class='rounded-0 m-0 alert alert-dismissible fade show alert-@Context.Session.GetString("flash-type")'
+            role="alert">
+            <p class="m-0">@Context.Session.GetString("flash")</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+        </div>
+    }
     <div role="main">
         @RenderBody()
     </div>

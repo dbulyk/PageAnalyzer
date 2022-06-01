@@ -12,7 +12,7 @@ using PageAnalyzerNET.Models;
 namespace PageAnalyzerNET.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220529140831_Initial")]
+    [Migration("20220601161640_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,9 @@ namespace PageAnalyzerNET.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Urls");
                 });

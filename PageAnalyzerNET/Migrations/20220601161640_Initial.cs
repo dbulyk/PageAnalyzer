@@ -52,6 +52,12 @@ namespace PageAnalyzerNET.Migrations
                 name: "IX_UrlChecks_UrlId",
                 table: "UrlChecks",
                 column: "UrlId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Urls_Name",
+                table: "Urls",
+                column: "Name",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

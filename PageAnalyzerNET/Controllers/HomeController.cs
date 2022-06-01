@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using PageAnalyzerNET.Models;
 
 namespace PageAnalyzerNET.Controllers;
@@ -24,12 +26,31 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(string name)
     {
-        var fullUrl = new Uri(name);
-        var url = new Url(fullUrl.GetLeftPart(UriPartial.Authority));
-        _db.Add(url);
-        await _db.SaveChangesAsync();
+        try
+        {
+            var fullUrl = new Uri(name);
+            var url = new Url(fullUrl.GetLeftPart(UriPartial.Authority));
+
+            var existUrl = await _db.Urls.FirstOrDefaultAsync(u => u.Name == url.Name);
+            if (existUrl != null)
+            {
+                HttpContext.Session.SetString("flash", "Данный url уже существует в системе.");
+                HttpContext.Session.SetString("flash-type", "danger");
+                return Redirect("/");
+            }
+            
+            _db.Add(url);
+            await _db.SaveChangesAsync();
+        }
+        catch (UriFormatException e)
+        {
+            HttpContext.Session.SetString("flash", "Некорректный url. Пожалуйста, проверьте введенное значение.");
+            HttpContext.Session.SetString("flash-type", "danger");
+            return Redirect("/");
+        }
         
-        _logger.Log(LogLevel.Information, "Пользователь создан", name);
+        HttpContext.Session.SetString("flash", "Url успешно добавлен.");
+        HttpContext.Session.SetString("flash-type", "success");
         return Redirect("/urls");
     }
 
