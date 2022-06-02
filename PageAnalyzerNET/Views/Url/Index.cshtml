@@ -19,7 +19,7 @@
                 <td>
                     <a asp-action="Show" asp-controller="Url" asp-route-id="@url.Id">@url.Name</a>
                 </td>
-                <td>@url.CreatedAt</td>
+                <td>@url.CreatedAt.ToLocalTime()</td>
                 <td>LastCheck</td>
             </tr>
         }

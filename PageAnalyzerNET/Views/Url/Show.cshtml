@@ -19,9 +19,9 @@
         </tbody>
     </table>
     <h2 class="mt-5">Проверки</h2>
-    @* <form method="post" th:action="@{/urls /{id}/checks(id = *{getId()})}"> *@
-    @*     <button type="submit" class="btn btn-primary">Запустить проверку</button> *@
-    @* </form> *@
+    <form asp-action="CheckUrl" asp-controller="Url" asp-route-id="@Model.Id">
+        <button type="submit" class="btn btn-primary">Запустить проверку</button>
+    </form>
     <table class="table table-bordered table-hover mt-3">
         <thead>
         <tr>
@@ -34,14 +34,18 @@
         </tr>
         </thead>
         <tbody>
-        @* <tr th:each="urlCheck : ${urlChecks}" th:object="${urlCheck}"> *@
-        @*     <td th:text="*{getId()}"></td> *@
-        @*     <td th:text="*{getStatusCode()}"></td> *@
-        @*     <td th:text="${#strings.abbreviate(urlCheck.getTitle(), 20)}"></td> *@
-        @*     <td th:text="${#strings.abbreviate(urlCheck.getH1(), 20)}"></td> *@
-        @*     <td th:text="${#strings.abbreviate(urlCheck.getDescription(), 50)}"></td> *@
-        @*     <td th:text="${#temporals.format(urlCheck.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td> *@
-        @* </tr> *@
+        @foreach (var check in Model.UrlChecks)
+        {
+            <tr>
+                <td>@check.Id</td>
+                <td>@check.StatusCode</td>
+                <td>@check.Title</td>
+                <td>@check.H1</td>
+                <td>@check.Description</td>
+                <td>@check.CreatedAt</td>
+            </tr>
+        }
+
         </tbody>
     </table>
 </div>

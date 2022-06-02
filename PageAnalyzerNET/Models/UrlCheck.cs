@@ -16,6 +16,24 @@ public class UrlCheck
     public string? Description { get; set; }
     public Url Url { get; set; }
     
-    [Timestamp]
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
+
+    public UrlCheck()
+    {
+    }
+
+    public UrlCheck(int? statusCode, Url url)
+    {
+        StatusCode = statusCode;
+        Url = url;
+    }
+
+    public UrlCheck(int? statusCode, string? title, string? h1, string? description, Url url)
+    {
+        StatusCode = statusCode;
+        Title = title;
+        H1 = h1;
+        Description = description;
+        Url = url;
+    }
 }

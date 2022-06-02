@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PageAnalyzerNET.Models;
@@ -7,9 +8,9 @@ namespace PageAnalyzerNET.Controllers;
 
 public class UrlController : Controller
 {
-    private readonly ApplicationContext _db;
+    private readonly PageAnalyzerNetContext _db;
     
-    public UrlController(ApplicationContext context)
+    public UrlController(PageAnalyzerNetContext context)
     {
         _db = context;
     }
@@ -35,11 +36,31 @@ public class UrlController : Controller
         return NotFound();
     }
 
-    // [HttpPost]
-    // public async Task<IActionResult> Show(Url url)
-    // {
-    //     
-    // }
+    [HttpPost]
+    public async Task<IActionResult> CheckUrl(int id)
+    {
+        var url = await _db.Urls.FirstOrDefaultAsync(u => u.Id == id);
+        if (url == null)
+        {
+            return NotFound();
+        }
+        
+        using var client = new HttpClient();
+        var result = await client.GetAsync(url.Name);
+        if (result.StatusCode != HttpStatusCode.OK)
+        {
+            var urlCheck = new UrlCheck((int) result.StatusCode, url);
+            _db.Add(urlCheck);
+        }
+        else
+        {
+            var html = await client.GetStringAsync(url.Name);
+            
+        }
+
+        await _db.SaveChangesAsync();
+        return Redirect($"/urls/{id}");
+    }
 
 
 }

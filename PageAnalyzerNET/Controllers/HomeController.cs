@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
 using PageAnalyzerNET.Models;
 
 namespace PageAnalyzerNET.Controllers;
@@ -9,9 +8,9 @@ namespace PageAnalyzerNET.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly ApplicationContext _db;
+    private readonly PageAnalyzerNetContext _db;
 
-    public HomeController(ILogger<HomeController> logger, ApplicationContext context)
+    public HomeController(ILogger<HomeController> logger, PageAnalyzerNetContext context)
     {
         _logger = logger;
         _db = context;

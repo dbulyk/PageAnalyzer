@@ -13,7 +13,7 @@ builder.Services.AddSession(options =>
 });
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connection));
+builder.Services.AddDbContext<PageAnalyzerNetContext>(options => options.UseNpgsql(connection));
 
 var app = builder.Build();
 
