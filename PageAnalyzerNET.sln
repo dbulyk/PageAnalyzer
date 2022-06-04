@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageAnalyzerNET", "PageAnalyzerNET\PageAnalyzerNET.csproj", "{B2A50760-1A74-410A-A41D-CA830378F4B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageAnalyzerNET.Tests", "PageAnalyzerNET.Tests\PageAnalyzerNET.Tests.csproj", "{2F517FA3-3759-4255-BBFB-BE4782945A24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{B2A50760-1A74-410A-A41D-CA830378F4B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2A50760-1A74-410A-A41D-CA830378F4B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2A50760-1A74-410A-A41D-CA830378F4B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F517FA3-3759-4255-BBFB-BE4782945A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F517FA3-3759-4255-BBFB-BE4782945A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F517FA3-3759-4255-BBFB-BE4782945A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F517FA3-3759-4255-BBFB-BE4782945A24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

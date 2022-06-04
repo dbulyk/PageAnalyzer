@@ -12,7 +12,7 @@ using PageAnalyzerNET.Models;
 namespace PageAnalyzerNET.Migrations
 {
     [DbContext(typeof(PageAnalyzerNetContext))]
-    [Migration("20220602180019_Initial")]
+    [Migration("20220604191220_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,15 +63,13 @@ namespace PageAnalyzerNET.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("H1")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("StatusCode")
                         .HasColumnType("integer");
 
                     b.Property<string>("Title")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.Property<int>("UrlId")
                         .HasColumnType("integer");

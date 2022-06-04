@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>Дата создания</td>
-            <td>@Model.CreatedAt</td>
+            <td>@Model.CreatedAt.ToLocalTime()</td>
         </tr>
         </tbody>
     </table>
@@ -42,10 +42,9 @@
                 <td>@check.Title</td>
                 <td>@check.H1</td>
                 <td>@check.Description</td>
-                <td>@check.CreatedAt</td>
+                <td>@check.CreatedAt.ToLocalTime()</td>
             </tr>
         }
-
         </tbody>
     </table>
 </div>

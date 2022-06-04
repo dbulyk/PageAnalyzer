@@ -1,7 +1,7 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @model PageAnalyzerNET.ViewModels.PaginatedListViewModel<Url>
 
-<div class="container-lg mt-5">
+<div class="container-lg mt-5 mb-5">
     <table class="table table-bordered table-hover mt-3">
         <thead>
         <tr>
@@ -19,35 +19,36 @@
                 <td>
                     <a asp-action="Show" asp-controller="Url" asp-route-id="@url.Id">@url.Name</a>
                 </td>
-                <td>@url.CreatedAt.ToLocalTime()</td>
-                <td>LastCheck</td>
+                <td>@url.GetLastCheckDatetime()</td>
+                <td>@url.GetLastCheckStatus()</td>
             </tr>
         }
         </tbody>
     </table>
 
     @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        var prevDisabled = !Model.HasPreviousPage ? "visually-hidden" : "";
+        var nextDisabled = !Model.HasNextPage ? "visually-hidden" : "";
+        var presDisabled = Model.TotalPages < 2 ? "visually-hidden" : "";
     }
     
     <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center mt-5">
-            <li>
+        <ul class="pagination justify-content-center mt-5 mb-5">
+            <li class="page-item @prevDisabled">
                 <a asp-action="Index" asp-controller="Url"
                    asp-route-page="@(Model.PageIndex - 1)"
-                   class="page-link @prevDisabled">
-                    Назад
+                   class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li>
-                <a class="page-link page-item">@Model.PageIndex</a>
+            <li class="page-item">
+                <a class="page-link @presDisabled">@Model.PageIndex</a>
             </li>
-            <li>
+            <li class="page-item @nextDisabled">
                 <a asp-action="Index" asp-controller="Url"
                    asp-route-page="@(Model.PageIndex + 1)"
-                   class="page-link @nextDisabled">
-                    Вперёд
+                   class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
         </ul>

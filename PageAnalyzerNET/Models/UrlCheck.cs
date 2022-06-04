@@ -8,13 +8,11 @@ public class UrlCheck
     public int Id { get; set; }
     public int? StatusCode { get; set; }
     
-    [MaxLength(50)] 
     public string? Title { get; set; }
     
-    [MaxLength(50)]
     public string? H1 { get; set; }
     public string? Description { get; set; }
-    public Url Url { get; set; }
+    private Url Url { get; set; }
     
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
 

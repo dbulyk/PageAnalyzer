@@ -31,8 +31,8 @@ namespace PageAnalyzerNET.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     StatusCode = table.Column<int>(type: "integer", nullable: true),
-                    Title = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    H1 = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    H1 = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     UrlId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)

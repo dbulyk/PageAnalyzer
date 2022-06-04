@@ -61,15 +61,13 @@ namespace PageAnalyzerNET.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("H1")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.Property<int?>("StatusCode")
                         .HasColumnType("integer");
 
                     b.Property<string>("Title")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.Property<int>("UrlId")
                         .HasColumnType("integer");

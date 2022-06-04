@@ -22,4 +22,16 @@ public class Url
     {
         Name = name;
     }
+
+    public DateTime? GetLastCheckDatetime()
+    {
+        var check = UrlChecks.LastOrDefault();
+        return check?.CreatedAt.ToLocalTime();
+    }
+
+    public int? GetLastCheckStatus()
+    {
+        var check = UrlChecks.LastOrDefault();
+        return check?.StatusCode;
+    }
 }
