@@ -69,7 +69,7 @@ namespace PageAnalyzerNET.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<int>("UrlId")
+                    b.Property<int?>("UrlId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -81,13 +81,9 @@ namespace PageAnalyzerNET.Migrations
 
             modelBuilder.Entity("PageAnalyzerNET.Models.UrlCheck", b =>
                 {
-                    b.HasOne("PageAnalyzerNET.Models.Url", "Url")
+                    b.HasOne("PageAnalyzerNET.Models.Url", null)
                         .WithMany("UrlChecks")
-                        .HasForeignKey("UrlId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Url");
+                        .HasForeignKey("UrlId");
                 });
 
             modelBuilder.Entity("PageAnalyzerNET.Models.Url", b =>

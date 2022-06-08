@@ -12,7 +12,7 @@ public class UrlCheck
     
     public string? H1 { get; set; }
     public string? Description { get; set; }
-    private Url Url { get; set; }
+    public Url Url { get; set; }
     
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
 
