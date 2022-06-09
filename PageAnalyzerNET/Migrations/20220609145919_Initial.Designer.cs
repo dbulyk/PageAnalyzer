@@ -12,14 +12,14 @@ using PageAnalyzerNET.Models;
 namespace PageAnalyzerNET.Migrations
 {
     [DbContext(typeof(PageAnalyzerNetContext))]
-    [Migration("20220607161207_Initial")]
+    [Migration("20220609145919_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "7.0.0-preview.4.22229.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -71,7 +71,7 @@ namespace PageAnalyzerNET.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<int?>("UrlId")
+                    b.Property<int>("UrlId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -83,9 +83,13 @@ namespace PageAnalyzerNET.Migrations
 
             modelBuilder.Entity("PageAnalyzerNET.Models.UrlCheck", b =>
                 {
-                    b.HasOne("PageAnalyzerNET.Models.Url", null)
+                    b.HasOne("PageAnalyzerNET.Models.Url", "Url")
                         .WithMany("UrlChecks")
-                        .HasForeignKey("UrlId");
+                        .HasForeignKey("UrlId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Url");
                 });
 
             modelBuilder.Entity("PageAnalyzerNET.Models.Url", b =>

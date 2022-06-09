@@ -75,7 +75,7 @@ public class UrlController : Controller
             if (html.Contains("description"))
             {
                 desc = html[(html.IndexOf("\"description\" content=\"") + 23)..];
-                desc = desc.Remove(desc.IndexOf("\">")).Trim();
+                desc = desc.Remove(desc.IndexOf("\"")).Trim();
             }
 
             var check = new UrlCheck((int)result.StatusCode, title, h1, desc, url);

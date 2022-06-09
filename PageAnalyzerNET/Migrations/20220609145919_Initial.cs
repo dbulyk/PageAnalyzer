@@ -34,8 +34,8 @@ namespace PageAnalyzerNET.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     H1 = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UrlId = table.Column<int>(type: "integer", nullable: true)
+                    UrlId = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,7 +44,8 @@ namespace PageAnalyzerNET.Migrations
                         name: "FK_UrlChecks_Urls_UrlId",
                         column: x => x.UrlId,
                         principalTable: "Urls",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
